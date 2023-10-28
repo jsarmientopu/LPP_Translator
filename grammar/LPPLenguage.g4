@@ -30,6 +30,7 @@ REPEAT: 'repita';
 FOR: 'para';
 FUNCTION: 'funcion';
 RETURN: 'retorne';
+CASE: 'caso';
 ASSGN: '<-';
 REAL: [0-9]+.[0-9]+;
 INT: [0-9]+;

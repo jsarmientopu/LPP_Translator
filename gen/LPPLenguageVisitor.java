@@ -16,6 +16,30 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInit(LPPLenguageParser.InitContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#procedure}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcedure(LPPLenguageParser.ProcedureContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#proc_params}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProc_params(LPPLenguageParser.Proc_paramsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#arr_cad}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArr_cad(LPPLenguageParser.Arr_cadContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction(LPPLenguageParser.FunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#commands}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -27,6 +51,30 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIf(LPPLenguageParser.IfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#case}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCase(LPPLenguageParser.CaseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#while}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile(LPPLenguageParser.WhileContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#repeat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRepeat(LPPLenguageParser.RepeatContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#for}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor(LPPLenguageParser.ForContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#exp}.
 	 * @param ctx the parse tree
