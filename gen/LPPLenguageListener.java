@@ -17,6 +17,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitInit(LPPLenguageParser.InitContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#register}.
+	 * @param ctx the parse tree
+	 */
+	void enterRegister(LPPLenguageParser.RegisterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#register}.
+	 * @param ctx the parse tree
+	 */
+	void exitRegister(LPPLenguageParser.RegisterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaration(LPPLenguageParser.DeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaration(LPPLenguageParser.DeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#procedure}.
 	 * @param ctx the parse tree
 	 */
@@ -117,6 +137,46 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitFor(LPPLenguageParser.ForContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssign(LPPLenguageParser.AssignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssign(LPPLenguageParser.AssignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#read}.
+	 * @param ctx the parse tree
+	 */
+	void enterRead(LPPLenguageParser.ReadContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#read}.
+	 * @param ctx the parse tree
+	 */
+	void exitRead(LPPLenguageParser.ReadContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#write}.
+	 * @param ctx the parse tree
+	 */
+	void enterWrite(LPPLenguageParser.WriteContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#write}.
+	 * @param ctx the parse tree
+	 */
+	void exitWrite(LPPLenguageParser.WriteContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#lineBreak}.
+	 * @param ctx the parse tree
+	 */
+	void enterLineBreak(LPPLenguageParser.LineBreakContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#lineBreak}.
+	 * @param ctx the parse tree
+	 */
+	void exitLineBreak(LPPLenguageParser.LineBreakContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#exp}.
 	 * @param ctx the parse tree
 	 */
@@ -126,4 +186,34 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExp(LPPLenguageParser.ExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#expArt}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpArt(LPPLenguageParser.ExpArtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#expArt}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpArt(LPPLenguageParser.ExpArtContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#expRel}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpRel(LPPLenguageParser.ExpRelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#expRel}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpRel(LPPLenguageParser.ExpRelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#expComp}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpComp(LPPLenguageParser.ExpCompContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#expComp}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpComp(LPPLenguageParser.ExpCompContext ctx);
 }

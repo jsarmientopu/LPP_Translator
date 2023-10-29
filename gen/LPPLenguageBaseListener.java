@@ -28,6 +28,30 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRegister(LPPLenguageParser.RegisterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRegister(LPPLenguageParser.RegisterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclaration(LPPLenguageParser.DeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaration(LPPLenguageParser.DeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProcedure(LPPLenguageParser.ProcedureContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -148,6 +172,54 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssign(LPPLenguageParser.AssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssign(LPPLenguageParser.AssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRead(LPPLenguageParser.ReadContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRead(LPPLenguageParser.ReadContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWrite(LPPLenguageParser.WriteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWrite(LPPLenguageParser.WriteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLineBreak(LPPLenguageParser.LineBreakContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLineBreak(LPPLenguageParser.LineBreakContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExp(LPPLenguageParser.ExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -155,6 +227,42 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExp(LPPLenguageParser.ExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpArt(LPPLenguageParser.ExpArtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpArt(LPPLenguageParser.ExpArtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpRel(LPPLenguageParser.ExpRelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpRel(LPPLenguageParser.ExpRelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpComp(LPPLenguageParser.ExpCompContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpComp(LPPLenguageParser.ExpCompContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
