@@ -67,6 +67,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitProc_params(LPPLenguageParser.Proc_paramsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#params}.
+	 * @param ctx the parse tree
+	 */
+	void enterParams(LPPLenguageParser.ParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#params}.
+	 * @param ctx the parse tree
+	 */
+	void exitParams(LPPLenguageParser.ParamsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#arr_cad_aux}.
+	 * @param ctx the parse tree
+	 */
+	void enterArr_cad_aux(LPPLenguageParser.Arr_cad_auxContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#arr_cad_aux}.
+	 * @param ctx the parse tree
+	 */
+	void exitArr_cad_aux(LPPLenguageParser.Arr_cad_auxContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#arr_cad}.
 	 * @param ctx the parse tree
 	 */
@@ -216,6 +236,16 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWrite(LPPLenguageParser.WriteContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#llamar}.
+	 * @param ctx the parse tree
+	 */
+	void enterLlamar(LPPLenguageParser.LlamarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#llamar}.
+	 * @param ctx the parse tree
+	 */
+	void exitLlamar(LPPLenguageParser.LlamarContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#lineBreak}.
 	 * @param ctx the parse tree

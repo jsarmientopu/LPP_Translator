@@ -46,6 +46,18 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProc_params(LPPLenguageParser.Proc_paramsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#params}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParams(LPPLenguageParser.ParamsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#arr_cad_aux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArr_cad_aux(LPPLenguageParser.Arr_cad_auxContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#arr_cad}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -135,6 +147,12 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWrite(LPPLenguageParser.WriteContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#llamar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLlamar(LPPLenguageParser.LlamarContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#lineBreak}.
 	 * @param ctx the parse tree

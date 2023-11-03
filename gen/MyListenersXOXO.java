@@ -23,7 +23,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             String tipo = ctx.TYPE().getText();
             String name = ctx.ID(0).getText();
 
-            if (!ctx.arr_cad().isEmpty()) {
+            if (!ctx.arr_cad_aux().isEmpty()) {
                 System.out.println(name + " = list()");
             }
             else {
@@ -229,6 +229,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterRepeat (LPPLenguageParser.RepeatContext ctx) {
         System.out.print(identacion.toString());
         System.out.println("while True:");
+        identacion.append('\t');
     }
 
     @Override
@@ -250,7 +251,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         String n1 = ctx.INT(0).getText();
         String n2 = ctx.INT(1).getText();
         System.out.print(identacion.toString());
-        System.out.println("for " + name + "in range(" + n1 + "," + n2 +"):");
+        System.out.println("for " + name + " in range(" + n1 + "," + n2 +"):");
         identacion.append("\t");
     }
 

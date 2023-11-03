@@ -3,11 +3,13 @@ grammar LPPLenguage;
 init: (register)* (declaration)* (procedure | function)* 'inicio' (commands)* 'fin';
 
 register: 'registro' ID (declaration)+ 'fin registro';
-declaration:    TYPE (arr_cad)* ID (COMMA ID)*
+declaration:    TYPE (arr_cad_aux)* ID (COMMA ID)*
                 | ID ID (COMMA ID)*;
 procedure:  PROC ID proc_declaration? (declaration)* 'inicio' (commands)* 'fin';
 proc_declaration: ('(' (VAR)? TYPE (arr_cad)* ID (proc_params)* ')');
 proc_params: COMMA (VAR)? TYPE (arr_cad)* ID;
+params:      COMMA (val | ID);
+arr_cad_aux:'['( INT )( ',' ( INT ) )*']';
 arr_cad:    '['( INT )( ',' ( INT ) )*']';
 function:   FUNCTION ID proc_declaration? (declaration)* 'inicio' (commands)* RETURN exp 'fin';
 commands:   if
@@ -18,6 +20,7 @@ commands:   if
             | assign
             | read
             | write
+            | llamar
             | lineBreak;
 if:         IF condition 'entonces' (commands)* (else (commands)*)? 'fin si';
 condition:  expRel_;
@@ -31,6 +34,7 @@ for:        FOR ID ASSGN INT 'hasta' INT 'haga' (commands)* 'fin para';
 assign:     ID '<-' exp;
 read:       'lea' ID (',' ID)*;
 write:      'escriba' ( expArt_ | expRel_ | val ) ( comma ( expArt_ | expRel_ | val ) )*;
+llamar :    'llamar' ID (lpar (val | ID) (params)* rpar)?;
 lineBreak:  'llamar' 'nueva_linea';
 exp: expArt | expRel;
 expArt: expArt_;
@@ -45,7 +49,7 @@ expRel_ :expRel_ expRelAux
          | expArt_;
 lpar: '(';
 rpar: ')';
-expRelAux : LOGOP expRelAux;
+expRelAux : LOGOP expRel_;
 expComp:expArt_ expComp_;
 expComp_: RELOP expArt_;
 comma: ',';
