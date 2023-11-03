@@ -256,6 +256,18 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterWrite(LPPLenguageParser.WriteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWrite(LPPLenguageParser.WriteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAssign(LPPLenguageParser.AssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -275,18 +287,6 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRead(LPPLenguageParser.ReadContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterWrite(LPPLenguageParser.WriteContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitWrite(LPPLenguageParser.WriteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

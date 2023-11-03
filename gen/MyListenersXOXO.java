@@ -7,7 +7,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void enterRegister (LPPLenguageParser.RegisterContext ctx) {
         System.out.print("class ");
-        String name = ctx.ID().getText();
+        String name = ctx.ID().getText().toLowerCase();
         System.out.println(name + ":");
         identacion.append('\t');
     }
@@ -20,10 +20,11 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterDeclaration (LPPLenguageParser.DeclarationContext ctx) {
         System.out.print(identacion.toString());
         if (ctx.TYPE() != null) {
-            String tipo = ctx.TYPE().getText();
-            String name = ctx.ID(0).getText();
-
-            if (!ctx.arr_cad_aux().isEmpty()) {
+            String tipo = ctx.TYPE().getText().toLowerCase();
+            String name = ctx.ID(0).getText().toLowerCase();
+            
+            
+            if ((!ctx.arr_cad_aux().isEmpty() && (!tipo.equals("cadena") || ctx.arr_cad_aux(0).getRuleContext().getText().contains(","))) || ctx.arr_cad_aux().size() > 1) {
                 System.out.println(name + " = list()");
             }
             else {
@@ -33,31 +34,31 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                         break;
 
                     case "real":
-                        System.out.println(name + "= 0.0");
+                        System.out.println(name + " = 0.0");
                         break;
 
                     case "booleano":
-                        System.out.println(name + "= False");
+                        System.out.println(name + " = False");
                         break;
 
                     case "caracter", "cadena":
-                        System.out.println(name + "= ''");
+                        System.out.println(name + " = ''");
                         break;
                 }
             }
             for (int i = 0; i < ctx.COMMA().size(); i++) {
-                name = ctx.ID(i + 1).getText();
+                name = ctx.ID(i + 1).getText().toLowerCase();
                 switch (tipo) {
                     case "entero":
                         System.out.println(name + " = 0");
                         break;
 
                     case "real":
-                        System.out.println(name + "= 0.0");
+                        System.out.println(name + " = 0.0");
                         break;
 
                     case "booleano":
-                        System.out.println(name + "= False");
+                        System.out.println(name + " = False");
                         break;
 
                     case "caracter", "cadena":
@@ -67,20 +68,20 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             }
         }
         else {
-            String tipo = ctx.ID(0).getText();
-            String name = ctx.ID(1).getText();
+            String tipo = ctx.ID(0).getText().toLowerCase();
+            String name = ctx.ID(1).getText().toLowerCase();
             System.out.println(name + tipo + "()");
 
             for (int i = 0;i < ctx.COMMA().size(); i++) {
-                name = ctx.ID(i + 2).getText();
-                System.out.println(name + tipo + "()");
+                name = ctx.ID(i + 2).getText().toLowerCase();
+                System.out.println(name + " = " + tipo + "()");
             }
         }
     }
 
     @Override
     public void enterProcedure (LPPLenguageParser.ProcedureContext ctx) {
-        String name = ctx.ID().getText();
+        String name = ctx.ID().getText().toLowerCase();
         System.out.print("def " + name);
 
         if (ctx.proc_declaration() == null) {
@@ -105,7 +106,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         if (ctx.VAR() != null) {
             params.append("global ");
         }
-        params.append(ctx.ID().getText());
+        params.append(ctx.ID().getText().toLowerCase());
         System.out.print("(" + params.toString());
     }
 
@@ -116,21 +117,21 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterProc_params (LPPLenguageParser.Proc_paramsContext ctx) {
-        System.out.print(", " + (ctx.VAR() != null ? "global" : "") + ctx.ID().getText());
+        System.out.print(", " + (ctx.VAR() != null ? "global" : "") + ctx.ID().getText().toLowerCase());
     }
 
 
     @Override
     public void enterArr_cad (LPPLenguageParser.Arr_cadContext ctx) {
-        System.out.print("[" + ctx.INT(0).getText() + "]");
+        System.out.print("[" + ctx.INT(0).getText().toLowerCase() + "]");
         for (int i = 1;i < ctx.INT().size(); i++) {
-            System.out.print("[" + ctx.INT(1).getText() + "]");
+            System.out.print("[" + ctx.INT(1).getText().toLowerCase() + "]");
         }
     }
 
     @Override
     public void enterFunction (LPPLenguageParser.FunctionContext ctx) {
-        String name = ctx.ID().getText();
+        String name = ctx.ID().getText().toLowerCase();
         System.out.print("def " + name);
 
         if (ctx.proc_declaration() == null) {
@@ -180,19 +181,19 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void enterAssign (LPPLenguageParser.AssignContext ctx) {
         System.out.print(identacion.toString());
-        System.out.print(ctx.ID().getText() + " = ");
+        System.out.print(ctx.ID().getText().toLowerCase() + " = ");
     }
 
     @Override
     public void enterCase (LPPLenguageParser.CaseContext ctx) {
         System.out.print(identacion.toString());
         StringBuilder values = new StringBuilder();
-        values.append(ctx.ID().getText() + " == " + ctx.val(0).getText());
+        values.append(ctx.ID().getText().toLowerCase() + " == " + ctx.val(0).getText().toLowerCase());
         for (int i = 1; i < ctx.val().size(); i++) {
-            values.append(" or ").append(ctx.ID().getText()).append(" == ").append(ctx.val(i).getText());
+            values.append(" or ").append(ctx.ID().getText().toLowerCase()).append(" == ").append(ctx.val(i).getText().toLowerCase());
         }
         System.out.println("if " + values + ":");
-        identificador = ctx.ID().getText();
+        identificador = ctx.ID().getText().toLowerCase();
         identacion.append('\t');
     }
 
@@ -206,9 +207,9 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         identacion.deleteCharAt(identacion.length() - 1);
         System.out.print(identacion.toString());
         StringBuilder values = new StringBuilder();
-        values.append(identificador).append(" == ").append(ctx.val(0).getText());
+        values.append(identificador).append(" == ").append(ctx.val(0).getText().toLowerCase());
         for (int i = 1; i < ctx.val().size(); i++) {
-            values.append(" or ").append(identificador).append(" == ").append(ctx.val(i).getText());
+            values.append(" or ").append(identificador).append(" == ").append(ctx.val(i).getText().toLowerCase());
         }
         System.out.println("elif " + values + ":");
         identacion.append('\t');
@@ -247,9 +248,9 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterFor (LPPLenguageParser.ForContext ctx) {
-        String name = ctx.ID().getText();
-        String n1 = ctx.INT(0).getText();
-        String n2 = ctx.INT(1).getText();
+        String name = ctx.ID().getText().toLowerCase();
+        String n1 = ctx.INT(0).getText().toLowerCase();
+        String n2 = ctx.INT(1).getText().toLowerCase();
         System.out.print(identacion.toString());
         System.out.println("for " + name + " in range(" + n1 + "," + n2 +"):");
         identacion.append("\t");
@@ -263,9 +264,9 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void enterRead (LPPLenguageParser.ReadContext ctx) {
         System.out.print(identacion.toString());
-        System.out.println(ctx.ID(0).getText() + " = input()");
+        System.out.println(ctx.ID(0).getText().toLowerCase() + " = input()");
         for (int i = 1;i < ctx.ID().size(); i++) {
-            System.out.println(ctx.ID(i).getText() + " = input()");
+            System.out.println(ctx.ID(i).getText().toLowerCase() + " = input()");
         }
     }
 
@@ -295,14 +296,14 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void enterExpArt_ (LPPLenguageParser.ExpArt_Context ctx) {
         if (ctx.val() != null) {
-            System.out.print(ctx.val().getText());
+            System.out.print(ctx.val().getText().toLowerCase());
         }
     }
 
 
     @Override
     public void enterExpArtAux (LPPLenguageParser.ExpArtAuxContext ctx) {
-        String operator = ctx.ARTOP().getText();
+        String operator = ctx.ARTOP().getText().toLowerCase();
         if (operator.equals("^")) {
             operator = "**";
         }
@@ -332,7 +333,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterExpRelAux (LPPLenguageParser.ExpRelAuxContext ctx) {
-        String operator = ctx.LOGOP().getText();
+        String operator = ctx.LOGOP().getText().toLowerCase();
         if (operator.equals("y")) {
             operator = "and";
         }
@@ -345,7 +346,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterExpComp_ (LPPLenguageParser.ExpComp_Context ctx) {
-        String operator = ctx.RELOP().getText();
+        String operator = ctx.RELOP().getText().toLowerCase();
         if (operator.equals("=")) {
             operator = "==";
         }

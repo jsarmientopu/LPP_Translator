@@ -130,6 +130,12 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFor(LPPLenguageParser.ForContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#write}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWrite(LPPLenguageParser.WriteContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#assign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -141,12 +147,6 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRead(LPPLenguageParser.ReadContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LPPLenguageParser#write}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWrite(LPPLenguageParser.WriteContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#llamar}.
 	 * @param ctx the parse tree

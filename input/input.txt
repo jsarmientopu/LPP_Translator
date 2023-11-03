@@ -1,19 +1,9 @@
-cadena[25] nombre
-procedimiento asteriscos // sin parametros -> omitir parentesis
-	entero I
-	inicio
-		para i <- 1 hasta 5 haga
-			escriba "*"
-		fin para
-	fin
-inicio
-	escriba "Ingresar su nombre: "
-	lea nombre
-	/* se utiliza la palabra reservada 'llamar'
-	para invocar los procedimientos en cuestión*/
-	llamar asteriscos
-	llamar nueva_linea
-	escriba nombre
-	llamar nueva_linea
-	llamar asteriscos
-fin
+entero I,k
+Inicio
+	Para I<- 1 hasta 4 haga
+		Para K<- 1 hasta 5 haga
+			Escriba I
+		Fin para
+		Llamar nueva_linea
+	Fin para
+Fin
