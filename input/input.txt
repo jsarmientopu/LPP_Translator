@@ -1,0 +1,22 @@
+entero numero
+inicio
+	escriba "Ingrese un número: "
+	lea numero
+	llamar nueva_linea
+
+	si numero=100 entonces
+		escriba "El número es 100"
+	      sino si numero>100 entonces
+		    escriba "El número es mayor que 100"
+	          sino
+		        escriba "El número es menor que 100"
+	      fin si
+      fin si
+
+fin
+
+
+
+
+
+

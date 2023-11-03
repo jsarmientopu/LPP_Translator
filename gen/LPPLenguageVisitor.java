@@ -1,4 +1,4 @@
-// Generated from C:/Users/Sebastian Sarmiento/Documents/LENGUAJES/translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
+// Generated from C:/Users/Juan carlos/IdeaProjects/LPP_Translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -34,6 +34,12 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProcedure(LPPLenguageParser.ProcedureContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#proc_declaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProc_declaration(LPPLenguageParser.Proc_declarationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#proc_params}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -64,11 +70,29 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIf(LPPLenguageParser.IfContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondition(LPPLenguageParser.ConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#else}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElse(LPPLenguageParser.ElseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#case}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCase(LPPLenguageParser.CaseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#case__}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCase__(LPPLenguageParser.Case__Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#while}.
 	 * @param ctx the parse tree
@@ -81,6 +105,12 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRepeat(LPPLenguageParser.RepeatContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#until}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUntil(LPPLenguageParser.UntilContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#for}.
 	 * @param ctx the parse tree
@@ -124,15 +154,69 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpArt(LPPLenguageParser.ExpArtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#expArt_}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpArt_(LPPLenguageParser.ExpArt_Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#expArtAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpArtAux(LPPLenguageParser.ExpArtAuxContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#expRel}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExpRel(LPPLenguageParser.ExpRelContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#expRel_}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpRel_(LPPLenguageParser.ExpRel_Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#lpar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLpar(LPPLenguageParser.LparContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#rpar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRpar(LPPLenguageParser.RparContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#expRelAux}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpRelAux(LPPLenguageParser.ExpRelAuxContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#expComp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExpComp(LPPLenguageParser.ExpCompContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#expComp_}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpComp_(LPPLenguageParser.ExpComp_Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#comma}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComma(LPPLenguageParser.CommaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#val}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVal(LPPLenguageParser.ValContext ctx);
 }
