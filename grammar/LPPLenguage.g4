@@ -4,9 +4,9 @@ init: (register)* (declaration)* (procedure | function)* INICIO (commands)* FIN;
 register: REGISTRO ID (declaration)+ FIN REGISTRO;
 declaration:    TYPE (arr_cad_aux)* ID (COMMA ID)*
                 | ID ID (COMMA ID)*
-                | ARREGLO dim_arr DE type_arr ID;
-type_arr:   TYPE | (ARREGLO dim_arr DE type_arr);
-dim_arr:    '[' INT (comma INT)* ']';
+                | ARREGLO dim_arr DE type_arr;
+type_arr:   declaration;
+dim_arr:    '[' INT (',' INT)* ']';
 procedure:  PROC ID proc_declaration? (declaration)* INICIO (commands)* FIN;
 proc_declaration: ('(' (VAR)? TYPE (arr_cad)* ID (proc_params)* ')');
 proc_params: COMMA (VAR)? TYPE (arr_cad)* ID;
@@ -38,7 +38,9 @@ for:        FOR ID ASSGN init_for HASTA end_for HAGA (commands)* FIN FOR;
 init_for:   expArt;
 end_for:    expArt;
 write:      ESCRIBA ( expArt_ | expRel_ ) ( comma ( expArt_ | expRel_ ) )*;
-assign:     ID index_arr '<-' exp;
+assign:     ID index_arr_assign '<-' exp;
+index_arr_assign: (lbra (exp_assign (',' exp_assign)*)? rbra)*;
+exp_assign: exp;
 read:       LEA ID (',' ID)*;
 llamar :    LLAMAR ID (lpar (val | ID) (params)* rpar)?;
 lineBreak:  LLAMAR NUEVA_LINEA;
@@ -53,7 +55,7 @@ expRel_ :expRel_ expRelAux
          | lpar expRel_ rpar
          | expComp
          | expArt_;
-index_arr: (lbra (exp (comma exp)*)? rbra)*;
+index_arr: (lbra (exp_assign (',' exp_assign)*)? rbra)*;
 lpar: '(';
 rpar: ')';
 lbra: '[';
@@ -62,7 +64,7 @@ expRelAux : LOGOP expRel_;
 expComp:expArt_ expComp_;
 expComp_: RELOP expArt_;
 comma: ',';
-val:  (ID | REAL | INT | CHR | STR);
+val:  (ID | REAL | INT | CHR | STR | BOL);
 
 
 
@@ -106,6 +108,7 @@ LOGOP:  [yY] | [oO] ;
 RELOP:  '=' | '<' | '>' | '<=' | '>=' | '<>' ;
 STR: '"' ('\\' ["\\] | ~["\\\r\n])* '"' ;
 CHR: '\'' (~[']) '\'' ;
+BOL: ([fF][aA][lL][sS][oO] | [vV][eE][rR][dD][aA][dD][eE][rR][oO]);
 ID: [a-zA-Z_][a-zA-Z0-9_]*;
 ESP : [ \t\r\n]+ -> skip ;
 

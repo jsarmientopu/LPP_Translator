@@ -47,6 +47,6 @@ inicio
 
   llamar nueva_linea
 
-  escriba "End of the program :3 ",(45*98/-(23 div 2)^3)
+  escriba "End of the program :3 "
 
 fin

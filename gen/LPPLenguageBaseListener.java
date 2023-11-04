@@ -52,6 +52,30 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterType_arr(LPPLenguageParser.Type_arrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitType_arr(LPPLenguageParser.Type_arrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDim_arr(LPPLenguageParser.Dim_arrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDim_arr(LPPLenguageParser.Dim_arrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProcedure(LPPLenguageParser.ProcedureContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -328,6 +352,30 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIndex_arr_assign(LPPLenguageParser.Index_arr_assignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIndex_arr_assign(LPPLenguageParser.Index_arr_assignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExp_assign(LPPLenguageParser.Exp_assignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExp_assign(LPPLenguageParser.Exp_assignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRead(LPPLenguageParser.ReadContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -436,6 +484,18 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIndex_arr(LPPLenguageParser.Index_arrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIndex_arr(LPPLenguageParser.Index_arrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLpar(LPPLenguageParser.LparContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -455,6 +515,30 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRpar(LPPLenguageParser.RparContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLbra(LPPLenguageParser.LbraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLbra(LPPLenguageParser.LbraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRbra(LPPLenguageParser.RbraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRbra(LPPLenguageParser.RbraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

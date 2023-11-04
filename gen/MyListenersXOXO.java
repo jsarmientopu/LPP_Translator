@@ -1,9 +1,22 @@
 import javax.print.DocFlavor;
+import java.util.*;
 
 public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     private final StringBuilder identacion = new StringBuilder();
     private String identificador = "";
+
+    private int count = 0;
+
+    private Stack<String> dimensions = new Stack<>();
+
+    private Queue<String> names = new LinkedList<>();
+
+    private Map<String, String> dictionary = new HashMap<String, String>();
+
+    @Override
+    public void enterInit(LPPLenguageParser.InitContext ctx) { dictionary.put("verdadero", "True"); dictionary.put("falso", "False");; }
+
     @Override
     public void enterRegister (LPPLenguageParser.RegisterContext ctx) {
         System.out.print("class ");
@@ -18,10 +31,14 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterDeclaration (LPPLenguageParser.DeclarationContext ctx) {
-        System.out.print(identacion.toString());
         if (ctx.TYPE() != null) {
+            System.out.print(identacion.toString());
             String tipo = ctx.TYPE().getText().toLowerCase();
-            String name = ctx.ID(0).getText().toLowerCase();
+            String name= ctx.ID(0).getText().toLowerCase();
+            if(!dimensions.isEmpty()){
+                names.add(name);
+                name = "x"+count;
+            }
             
             
             if ((!ctx.arr_cad_aux().isEmpty() && (!tipo.equals("cadena") || ctx.arr_cad_aux(0).getRuleContext().getText().contains(","))) || ctx.arr_cad_aux().size() > 1) {
@@ -48,6 +65,10 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             }
             for (int i = 0; i < ctx.COMMA().size(); i++) {
                 name = ctx.ID(i + 1).getText().toLowerCase();
+                if(!dimensions.isEmpty()){
+                    names.add(name);
+                    continue;
+                }
                 switch (tipo) {
                     case "entero":
                         System.out.println(name + " = 0");
@@ -67,7 +88,8 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                 }
             }
         }
-        else {
+        else if (ctx.ARREGLO()==null){
+            System.out.print(identacion.toString());
             String tipo = ctx.ID(0).getText().toLowerCase();
             String name = ctx.ID(1).getText().toLowerCase();
             System.out.println(name + tipo + "()");
@@ -76,6 +98,32 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                 name = ctx.ID(i + 2).getText().toLowerCase();
                 System.out.println(name + " = " + tipo + "()");
             }
+        }
+    }
+
+    @Override
+    public void enterDim_arr(LPPLenguageParser.Dim_arrContext ctx) {
+        for(int i=0; i< ctx.INT().size();i++){
+            dimensions.push(ctx.INT(i).getText());
+            System.out.println(identacion.toString()+"x"+count+"=[]");
+            System.out.println(identacion.toString()+"for y"+count+" in range(0,"+ctx.INT(i).getText()+"):");
+            identacion.append("\t");
+            count = count + 1;
+        }
+    }
+
+    @Override
+    public void exitType_arr(LPPLenguageParser.Type_arrContext ctx) {
+        while(!dimensions.isEmpty()){
+            if(count >0){
+                System.out.println(identacion.toString()+"x"+String.valueOf(count-1)+".append(x"+count+")");
+                identacion.deleteCharAt(identacion.length() - 1);
+            }
+            dimensions.pop();
+            count = count -1;
+        }
+        while(!names.isEmpty()){
+            System.out.println(identacion+names.poll()+"=x0");
         }
     }
 
@@ -190,7 +238,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void enterAssign (LPPLenguageParser.AssignContext ctx) {
         System.out.print(identacion.toString());
-        System.out.print(ctx.ID().getText().toLowerCase() + " = ");
+        System.out.print(ctx.ID().getText().toLowerCase());
     }
 
     @Override
@@ -199,12 +247,36 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     }
 
     @Override
+    public void exitIndex_arr_assign(LPPLenguageParser.Index_arr_assignContext ctx) {
+        System.out.print("=");
+    }
+
+    @Override
+    public void enterExp_assign(LPPLenguageParser.Exp_assignContext ctx) {
+        System.out.print("[");
+    }
+
+    @Override
+    public void exitExp_assign(LPPLenguageParser.Exp_assignContext ctx) {
+        System.out.print("]");
+    }
+
+    @Override
     public void enterCase (LPPLenguageParser.CaseContext ctx) {
         System.out.print(identacion.toString());
         StringBuilder values = new StringBuilder();
+        if (dictionary.get(ctx.val(0).getText().toLowerCase()) == null) {
+            values.append(ctx.ID().getText().toLowerCase() + " == " + ctx.val(0).getText().toLowerCase());
+        }else{
+            values.append(ctx.ID().getText().toLowerCase() + " == " + dictionary.get(ctx.val(0).getText().toLowerCase()));
+        }
         values.append(ctx.ID().getText().toLowerCase() + " == " + ctx.val(0).getText().toLowerCase());
         for (int i = 1; i < ctx.val().size(); i++) {
-            values.append(" or ").append(ctx.ID().getText().toLowerCase()).append(" == ").append(ctx.val(i).getText().toLowerCase());
+            if (dictionary.get(ctx.val(i).getText().toLowerCase()) == null) {
+                values.append(" or ").append(ctx.ID().getText().toLowerCase()).append(" == ").append(ctx.val(i).getText().toLowerCase());
+            }else{
+                values.append(" or ").append(ctx.ID().getText().toLowerCase()).append(" == ").append(dictionary.get(ctx.val(i).getText().toLowerCase()));
+            }
         }
         System.out.println("if " + values + ":");
         identificador = ctx.ID().getText().toLowerCase();
@@ -221,9 +293,17 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         identacion.deleteCharAt(identacion.length() - 1);
         System.out.print(identacion.toString());
         StringBuilder values = new StringBuilder();
-        values.append(identificador).append(" == ").append(ctx.val(0).getText().toLowerCase());
+        if (dictionary.get(ctx.val(0).getText().toLowerCase()) == null) {
+            values.append(identificador).append(" == ").append(ctx.val(0).getText().toLowerCase());
+        }else{
+            values.append(identificador).append(" == ").append(dictionary.get(ctx.val(0).getText().toLowerCase()));
+        }
         for (int i = 1; i < ctx.val().size(); i++) {
-            values.append(" or ").append(identificador).append(" == ").append(ctx.val(i).getText().toLowerCase());
+            if (dictionary.get(ctx.val(i).getText().toLowerCase()) == null) {
+                values.append(identificador).append(" == ").append(ctx.val(i).getText().toLowerCase());
+            }else{
+                values.append(identificador).append(" == ").append(dictionary.get(ctx.val(i).getText().toLowerCase()));
+            }
         }
         System.out.println("elif " + values + ":");
         identacion.append('\t');
@@ -231,7 +311,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterWhile (LPPLenguageParser.WhileContext ctx) {
-        System.out.print("while ");
+        System.out.print(identacion+"while ");
         identacion.append('\t');
     }
 
@@ -322,7 +402,11 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void enterExpArt_ (LPPLenguageParser.ExpArt_Context ctx) {
         if (ctx.val() != null) {
-            System.out.print(ctx.val().getText().toLowerCase());
+            if(dictionary.get(ctx.val().getText().toLowerCase())==null) {
+                System.out.print(ctx.val().getText().toLowerCase());
+            }else{
+                System.out.print(dictionary.get(ctx.val().getText().toLowerCase()));
+            }
         }
     }
 

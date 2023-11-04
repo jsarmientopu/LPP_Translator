@@ -37,6 +37,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitDeclaration(LPPLenguageParser.DeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#type_arr}.
+	 * @param ctx the parse tree
+	 */
+	void enterType_arr(LPPLenguageParser.Type_arrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#type_arr}.
+	 * @param ctx the parse tree
+	 */
+	void exitType_arr(LPPLenguageParser.Type_arrContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#dim_arr}.
+	 * @param ctx the parse tree
+	 */
+	void enterDim_arr(LPPLenguageParser.Dim_arrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#dim_arr}.
+	 * @param ctx the parse tree
+	 */
+	void exitDim_arr(LPPLenguageParser.Dim_arrContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#procedure}.
 	 * @param ctx the parse tree
 	 */
@@ -267,6 +287,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitAssign(LPPLenguageParser.AssignContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#index_arr_assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterIndex_arr_assign(LPPLenguageParser.Index_arr_assignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#index_arr_assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitIndex_arr_assign(LPPLenguageParser.Index_arr_assignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#exp_assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterExp_assign(LPPLenguageParser.Exp_assignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#exp_assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitExp_assign(LPPLenguageParser.Exp_assignContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#read}.
 	 * @param ctx the parse tree
 	 */
@@ -357,6 +397,16 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitExpRel_(LPPLenguageParser.ExpRel_Context ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#index_arr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIndex_arr(LPPLenguageParser.Index_arrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#index_arr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIndex_arr(LPPLenguageParser.Index_arrContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#lpar}.
 	 * @param ctx the parse tree
 	 */
@@ -376,6 +426,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRpar(LPPLenguageParser.RparContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#lbra}.
+	 * @param ctx the parse tree
+	 */
+	void enterLbra(LPPLenguageParser.LbraContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#lbra}.
+	 * @param ctx the parse tree
+	 */
+	void exitLbra(LPPLenguageParser.LbraContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#rbra}.
+	 * @param ctx the parse tree
+	 */
+	void enterRbra(LPPLenguageParser.RbraContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#rbra}.
+	 * @param ctx the parse tree
+	 */
+	void exitRbra(LPPLenguageParser.RbraContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#expRelAux}.
 	 * @param ctx the parse tree
