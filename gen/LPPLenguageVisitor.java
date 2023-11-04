@@ -1,4 +1,4 @@
-// Generated from C:/Users/Juan carlos/IdeaProjects/LPP_Translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
+// Generated from /Users/edilberto/Documents/Lenguajes/LPP_Translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -70,6 +70,18 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunction(LPPLenguageParser.FunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#return}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturn(LPPLenguageParser.ReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#val_return}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVal_return(LPPLenguageParser.Val_returnContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#commands}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -129,6 +141,18 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFor(LPPLenguageParser.ForContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#init_for}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInit_for(LPPLenguageParser.Init_forContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#end_for}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEnd_for(LPPLenguageParser.End_forContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#write}.
 	 * @param ctx the parse tree

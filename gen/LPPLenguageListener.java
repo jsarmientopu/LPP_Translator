@@ -1,4 +1,4 @@
-// Generated from C:/Users/Juan carlos/IdeaProjects/LPP_Translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
+// Generated from /Users/edilberto/Documents/Lenguajes/LPP_Translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -107,6 +107,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitFunction(LPPLenguageParser.FunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#return}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturn(LPPLenguageParser.ReturnContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#return}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturn(LPPLenguageParser.ReturnContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#val_return}.
+	 * @param ctx the parse tree
+	 */
+	void enterVal_return(LPPLenguageParser.Val_returnContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#val_return}.
+	 * @param ctx the parse tree
+	 */
+	void exitVal_return(LPPLenguageParser.Val_returnContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#commands}.
 	 * @param ctx the parse tree
 	 */
@@ -206,6 +226,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFor(LPPLenguageParser.ForContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#init_for}.
+	 * @param ctx the parse tree
+	 */
+	void enterInit_for(LPPLenguageParser.Init_forContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#init_for}.
+	 * @param ctx the parse tree
+	 */
+	void exitInit_for(LPPLenguageParser.Init_forContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#end_for}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnd_for(LPPLenguageParser.End_forContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#end_for}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnd_for(LPPLenguageParser.End_forContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#write}.
 	 * @param ctx the parse tree

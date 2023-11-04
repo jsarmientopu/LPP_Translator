@@ -1,4 +1,4 @@
-// Generated from C:/Users/Juan carlos/IdeaProjects/LPP_Translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
+// Generated from /Users/edilberto/Documents/Lenguajes/LPP_Translator/grammar/LPPLenguage.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -136,6 +136,30 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterReturn(LPPLenguageParser.ReturnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturn(LPPLenguageParser.ReturnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVal_return(LPPLenguageParser.Val_returnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVal_return(LPPLenguageParser.Val_returnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCommands(LPPLenguageParser.CommandsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -251,6 +275,30 @@ public class LPPLenguageBaseListener implements LPPLenguageListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFor(LPPLenguageParser.ForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInit_for(LPPLenguageParser.Init_forContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInit_for(LPPLenguageParser.Init_forContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEnd_for(LPPLenguageParser.End_forContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEnd_for(LPPLenguageParser.End_forContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

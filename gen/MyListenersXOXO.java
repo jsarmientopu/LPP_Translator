@@ -150,6 +150,15 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         identacion.deleteCharAt(identacion.length() - 1);
     }
 
+    @Override
+    public void enterReturn(LPPLenguageParser.ReturnContext ctx) {
+        System.out.print(identacion.toString()+"return ");
+    }
+
+    @Override
+    public void exitReturn(LPPLenguageParser.ReturnContext ctx) {
+        System.out.println();
+    }
 
     //COMMANDS
     @Override
@@ -182,6 +191,11 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterAssign (LPPLenguageParser.AssignContext ctx) {
         System.out.print(identacion.toString());
         System.out.print(ctx.ID().getText().toLowerCase() + " = ");
+    }
+
+    @Override
+    public void exitAssign (LPPLenguageParser.AssignContext ctx) {
+        System.out.println();
     }
 
     @Override
@@ -249,10 +263,22 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void enterFor (LPPLenguageParser.ForContext ctx) {
         String name = ctx.ID().getText().toLowerCase();
-        String n1 = ctx.INT(0).getText().toLowerCase();
-        String n2 = ctx.INT(1).getText().toLowerCase();
+        //String n1 = ctx.INT(0).getText().toLowerCase();
+        //String n2 = ctx.INT(1).getText().toLowerCase();
         System.out.print(identacion.toString());
-        System.out.println("for " + name + " in range(" + n1 + "," + n2 +"):");
+        //System.out.println("for " + name + " in range(" + n1 + "," + n2 +"):");
+        System.out.print("for " + name + " in range (");
+        //identacion.append("\t");
+    }
+
+    @Override
+    public void exitInit_for (LPPLenguageParser.Init_forContext ctx) {
+        System.out.print(",");
+    }
+
+    @Override
+    public void exitEnd_for (LPPLenguageParser.End_forContext ctx) {
+        System.out.println("):");
         identacion.append("\t");
     }
 
@@ -290,7 +316,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void exitExpArt (LPPLenguageParser.ExpArtContext ctx) {
-        System.out.println();
+        //System.out.println();
     }
 
     @Override
@@ -360,4 +386,5 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterComma (LPPLenguageParser.CommaContext ctx) {
         System.out.print(" , ");
     }
+
 }
