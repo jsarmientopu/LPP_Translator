@@ -38,24 +38,27 @@ for:        FOR ID ASSGN init_for HASTA end_for HAGA (commands)* FIN FOR;
 init_for:   expArt;
 end_for:    expArt;
 write:      ESCRIBA ( expArt_ | expRel_ ) ( comma ( expArt_ | expRel_ ) )*;
-assign:     ID index_arr_assign '<-' exp;
-index_arr_assign: (lbra (exp_assign (',' exp_assign)*)? rbra)*;
+assign:     ID (index_arr_assign | register_val_assign)? '<-' exp;
+index_arr_assign: (lbra (exp_assign (',' exp_assign)*)? rbra)+;
+register_val_assign:   ('.' ID)+;
+register_val:   ('.' ID)+;
 exp_assign: exp;
 read:       LEA ID (',' ID)*;
-llamar :    LLAMAR ID (lpar (val | ID) (params)* rpar)?;
+llamar :    LLAMAR ID (lpar ((val | ID) (params)*)? rpar)?;
 lineBreak:  LLAMAR NUEVA_LINEA;
 exp: expArt | expRel;
 expArt: expArt_;
 expArt_ : expArt_ expArtAux
+          | expArtAux
           | lpar expArt_ rpar
-          | val (lpar (exp (comma exp)*)? rpar)? index_arr;
+          | val (lpar (exp (comma exp)*)? rpar)? index_arr? register_val?;
 expArtAux: ARTOP expArt_;
 expRel: expRel_;
 expRel_ :expRel_ expRelAux
          | lpar expRel_ rpar
          | expComp
          | expArt_;
-index_arr: (lbra (exp_assign (',' exp_assign)*)? rbra)*;
+index_arr: (lbra (exp_assign (',' exp_assign)*)? rbra)+;
 lpar: '(';
 rpar: ')';
 lbra: '[';
@@ -65,7 +68,6 @@ expComp:expArt_ expComp_;
 expComp_: RELOP expArt_;
 comma: ',';
 val:  (ID | REAL | INT | CHR | STR | BOL);
-
 
 
 
@@ -101,9 +103,9 @@ LEA: [lL][eE][aA];
 LLAMAR: [lL][lL][aA][mM][aA][rR];
 NUEVA_LINEA: [nN][uU][eE][vV][aA][_][lL][iI][nN][eE][aA];
 ASSGN: '<-';
-REAL: '-'?[0-9]+'.'[0-9]+;
-INT: '-'?[0-9]+;
 ARTOP:  '^' | '+' | '-' | '*' | '/' | [dD][iI][vV] | [mM][oO][dD] ;
+REAL: [0-9]+'.'[0-9]+;
+INT: [0-9]+;
 LOGOP:  [yY] | [oO] ;
 RELOP:  '=' | '<' | '>' | '<=' | '>=' | '<>' ;
 STR: '"' ('\\' ["\\] | ~["\\\r\n])* '"' ;

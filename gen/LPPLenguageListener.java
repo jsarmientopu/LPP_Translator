@@ -297,6 +297,26 @@ public interface LPPLenguageListener extends ParseTreeListener {
 	 */
 	void exitIndex_arr_assign(LPPLenguageParser.Index_arr_assignContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#register_val_assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterRegister_val_assign(LPPLenguageParser.Register_val_assignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#register_val_assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitRegister_val_assign(LPPLenguageParser.Register_val_assignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LPPLenguageParser#register_val}.
+	 * @param ctx the parse tree
+	 */
+	void enterRegister_val(LPPLenguageParser.Register_valContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LPPLenguageParser#register_val}.
+	 * @param ctx the parse tree
+	 */
+	void exitRegister_val(LPPLenguageParser.Register_valContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LPPLenguageParser#exp_assign}.
 	 * @param ctx the parse tree
 	 */

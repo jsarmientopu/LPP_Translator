@@ -184,6 +184,18 @@ public interface LPPLenguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIndex_arr_assign(LPPLenguageParser.Index_arr_assignContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#register_val_assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRegister_val_assign(LPPLenguageParser.Register_val_assignContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LPPLenguageParser#register_val}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRegister_val(LPPLenguageParser.Register_valContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LPPLenguageParser#exp_assign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

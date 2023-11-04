@@ -92,7 +92,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             System.out.print(identacion.toString());
             String tipo = ctx.ID(0).getText().toLowerCase();
             String name = ctx.ID(1).getText().toLowerCase();
-            System.out.println(name + tipo + "()");
+            System.out.println(name + " = " + tipo + "()");
 
             for (int i = 0;i < ctx.COMMA().size(); i++) {
                 name = ctx.ID(i + 2).getText().toLowerCase();
@@ -239,6 +239,9 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterAssign (LPPLenguageParser.AssignContext ctx) {
         System.out.print(identacion.toString());
         System.out.print(ctx.ID().getText().toLowerCase());
+        if(ctx.index_arr_assign()==null && ctx.register_val_assign()==null){
+            System.out.print("=");
+        }
     }
 
     @Override
@@ -259,6 +262,21 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void exitExp_assign(LPPLenguageParser.Exp_assignContext ctx) {
         System.out.print("]");
+    }
+
+    @Override
+    public void enterRegister_val_assign(LPPLenguageParser.Register_val_assignContext ctx) {
+        for(int i=0; i<ctx.ID().size();i++){
+            System.out.print("."+ctx.ID(i).getText());
+        }
+        System.out.print("=");
+    }
+
+    @Override
+    public void enterRegister_val(LPPLenguageParser.Register_valContext ctx) {
+        for(int i=0; i<ctx.ID().size();i++){
+            System.out.print("."+ctx.ID(i).getText());
+        }
     }
 
     @Override
@@ -385,6 +403,16 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     @Override
     public void exitWrite (LPPLenguageParser.WriteContext ctx) {
         System.out.println(",sep = '')");
+    }
+
+    @Override
+    public void enterLlamar(LPPLenguageParser.LlamarContext ctx) {
+        System.out.print(identacion+ctx.ID(0).getText().toLowerCase());
+    }
+
+    @Override
+    public void exitLlamar(LPPLenguageParser.LlamarContext ctx) {
+        System.out.println();
     }
 
     @Override
