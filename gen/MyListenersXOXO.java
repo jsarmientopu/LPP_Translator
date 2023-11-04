@@ -376,7 +376,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void exitEnd_for (LPPLenguageParser.End_forContext ctx) {
-        System.out.println("):");
+        System.out.println("+1):");
         identacion.append("\t");
     }
 
@@ -402,12 +402,15 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void exitWrite (LPPLenguageParser.WriteContext ctx) {
-        System.out.println(",sep = '')");
+        System.out.println(",sep = '', end=\"\")");
     }
 
     @Override
     public void enterLlamar(LPPLenguageParser.LlamarContext ctx) {
         System.out.print(identacion+ctx.ID(0).getText().toLowerCase());
+        if(ctx.lpar()==null){
+            System.out.print("()");
+        }
     }
 
     @Override
@@ -431,7 +434,11 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterExpArt_ (LPPLenguageParser.ExpArt_Context ctx) {
         if (ctx.val() != null) {
             if(dictionary.get(ctx.val().getText().toLowerCase())==null) {
-                System.out.print(ctx.val().getText().toLowerCase());
+                if(ctx.val().CHR()!=null || ctx.val().STR()!=null){
+                    System.out.print(ctx.val().getText());
+                }else{
+                    System.out.print(ctx.val().getText().toLowerCase());
+                }
             }else{
                 System.out.print(dictionary.get(ctx.val().getText().toLowerCase()));
             }
