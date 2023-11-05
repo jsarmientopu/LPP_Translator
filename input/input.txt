@@ -1,12 +1,21 @@
-entero acumulador
-entero i
+// ejemplo de un programa usando caso
+
+entero variable
+
 inicio
- i<-0
- acumulador<-0
- repita
- escriba ("Valor del acumulador en la iteracion: "),(acumulador)
-        llamar nueva_linea
-        i<-i+1
-        acumulador<-acumulador+(i*2)
- hasta (i=20) o (acumulador mod 5=4)
+
+ variable<-5
+
+ caso variable
+  1,2,3:
+  	escriba("Es un número entero entre 1 y 3")
+  4,9:
+  	escriba("Es el número 4")
+  5:
+  	escriba("Es el número 5")
+  sino:
+  	escriba("No sé qué número es :/")
+
+  fin caso
+
 fin

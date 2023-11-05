@@ -12,6 +12,8 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     private Queue<String> names = new LinkedList<>();
 
+    private Queue<String> globals = new LinkedList<>();
+
     private Map<String, String> dictionary = new HashMap<String, String>();
 
     private Map<String, String> variables = new HashMap<String, String>();
@@ -62,8 +64,10 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                         System.out.println(name + " = False");
                         variables.put(name, "bool");
                         break;
-
-                    case "caracter", "cadena":
+                    case "caracter":
+                        System.out.println(name + " = ''");
+                        break;
+                    case "cadena":
                         System.out.println(name + " = ''");
                         variables.put(name, "str "+ctx.arr_cad_aux(0).INT(0).getText());
                         break;
@@ -91,9 +95,13 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                         variables.put(name, "bool");
                         break;
 
-                    case "caracter", "cadena":
+                    case "caracter":
                         System.out.println(name + "= ''");
-                        variables.put(name, "str");
+                        variables.put(name, "chr");
+                        break;
+                    case "cadena":
+                        System.out.println(name + "= ''");
+                        variables.put(name, "str "+ctx.arr_cad_aux(0).INT(0).getText());
                         break;
                 }
             }
@@ -161,31 +169,79 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterProc_declaration (LPPLenguageParser.Proc_declarationContext ctx) {
-        StringBuilder params = new StringBuilder();
-        if (ctx.VAR() != null) {
-            params.append("global ");
+        //StringBuilder params = new StringBuilder();
+        System.out.print("(");
+        if (ctx.VAR() == null) {
+            System.out.print(ctx.ID().getText().toLowerCase());
+            switch (ctx.TYPE().getText()) {
+                case "entero":
+                    variables.put(ctx.ID().getText(), "int");
+                    break;
+
+                case "real":
+                    variables.put(ctx.ID().getText(), "float");
+                    break;
+
+                case "booleano":
+                    variables.put(ctx.ID().getText(), "bool");
+                    break;
+
+                case "caracter":
+                    variables.put(ctx.ID().getText(), "chr");
+                    break;
+                case "cadena":
+                    variables.put(ctx.ID().getText(), "str " + ctx.arr_cad(0).INT(0).getText());
+                    break;
+            }
+            //params.append("global ");
+        }else{
+            globals.add(ctx.ID().getText().toLowerCase());
         }
-        params.append(ctx.ID().getText().toLowerCase());
-        System.out.print("(" + params.toString());
+        //params.append(ctx.ID().getText().toLowerCase());
+        //System.out.print("(" + params.toString());
     }
 
     @Override
     public void exitProc_declaration (LPPLenguageParser.Proc_declarationContext ctx) {
         System.out.println("):");
+        if(globals.size()>0) {
+            System.out.print(identacion + "global " + globals.poll());
+            while (!globals.isEmpty()) {
+                System.out.print(", " + globals.poll());
+            }
+            System.out.println();
+        }
+
     }
 
     @Override
     public void enterProc_params (LPPLenguageParser.Proc_paramsContext ctx) {
-        System.out.print(", " + (ctx.VAR() != null ? "global" : "") + ctx.ID().getText().toLowerCase());
-    }
+        if(ctx.VAR()==null){
+            System.out.print(", "+ ctx.ID().getText().toLowerCase());
+            switch (ctx.TYPE().getText()) {
+                case "entero":
+                    variables.put(ctx.ID().getText(), "int");
+                    break;
 
+                case "real":
+                    variables.put(ctx.ID().getText(), "float");
+                    break;
 
-    @Override
-    public void enterArr_cad (LPPLenguageParser.Arr_cadContext ctx) {
-        System.out.print("[" + ctx.INT(0).getText().toLowerCase() + "]");
-        for (int i = 1;i < ctx.INT().size(); i++) {
-            System.out.print("[" + ctx.INT(1).getText().toLowerCase() + "]");
+                case "booleano":
+                    variables.put(ctx.ID().getText(), "bool");
+                    break;
+
+                case "caracter":
+                    variables.put(ctx.ID().getText(), "chr");
+                    break;
+                case "cadena":
+                    variables.put(ctx.ID().getText(), "str " + ctx.arr_cad(0).INT(0).getText());
+                    break;
+            }
+        }else{
+            globals.add(ctx.ID().getText().toLowerCase());
         }
+        //System.out.print(", " + (ctx.VAR() != null ? "global" : "") + ctx.ID().getText().toLowerCase());
     }
 
     @Override
@@ -300,9 +356,8 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         if (dictionary.get(ctx.val(0).getText().toLowerCase()) == null) {
             values.append(ctx.ID().getText().toLowerCase() + " == " + ctx.val(0).getText().toLowerCase());
         }else{
-            values.append(ctx.ID().getText().toLowerCase() + " == " + dictionary.get(ctx.val(0).getText().toLowerCase()));
+            values.append(dictionary.get(ctx.val(0).getText().toLowerCase()));
         }
-        values.append(ctx.ID().getText().toLowerCase() + " == " + ctx.val(0).getText().toLowerCase());
         for (int i = 1; i < ctx.val().size(); i++) {
             if (dictionary.get(ctx.val(i).getText().toLowerCase()) == null) {
                 values.append(" or ").append(ctx.ID().getText().toLowerCase()).append(" == ").append(ctx.val(i).getText().toLowerCase());
@@ -332,14 +387,16 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         }
         for (int i = 1; i < ctx.val().size(); i++) {
             if (dictionary.get(ctx.val(i).getText().toLowerCase()) == null) {
-                values.append(identificador).append(" == ").append(ctx.val(i).getText().toLowerCase());
+                values.append(" or ").append(identificador).append(" == ").append(ctx.val(i).getText().toLowerCase());
             }else{
-                values.append(identificador).append(" == ").append(dictionary.get(ctx.val(i).getText().toLowerCase()));
+                values.append(" or ").append(identificador).append(" == ").append(dictionary.get(ctx.val(i).getText().toLowerCase()));
             }
         }
         System.out.println("elif " + values + ":");
         identacion.append('\t');
     }
+
+
 
     @Override
     public void enterWhile (LPPLenguageParser.WhileContext ctx) {
@@ -421,7 +478,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterLlamar(LPPLenguageParser.LlamarContext ctx) {
-        System.out.print(identacion+ctx.ID(0).getText().toLowerCase());
+        System.out.print(identacion+ctx.ID().getText().toLowerCase());
         if(ctx.lpar()==null){
             System.out.print("()");
         }
@@ -450,11 +507,13 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             if(dictionary.get(ctx.val().getText().toLowerCase())==null) {
                 if(ctx.val().CHR()!=null || ctx.val().STR()!=null){
                     System.out.print(ctx.val().getText());
-                }else if(ctx.val().ID()!=null && variables.get(ctx.val().ID().getText())!=null && ctx.register_val()==null){
-                    if(variables.get(ctx.val().ID().getText()).split(" ").length>1){
-                        System.out.print(ctx.val().getText()+"[0:"+variables.get(ctx.val().ID().getText()).split(" ")[1]+"]");
-                    }else if(variables.get(ctx.val().ID().getText()).equals("int") || variables.get(ctx.val().ID().getText()).equals("float")){
-                        System.out.print(variables.get(ctx.val().ID().getText())+"("+ctx.val().getText()+")");
+                }else if(ctx.val().ID()!=null && variables.get(ctx.val().getText())!=null && ctx.register_val()==null){
+                    if(variables.get(ctx.val().getText()).split(" ").length>1){
+                        System.out.print(ctx.val().getText()+"[0:"+variables.get(ctx.val().getText()).split(" ")[1]+"]");
+                    }else if(variables.get(ctx.val().getText()).equals("int") || variables.get(ctx.val().getText()).equals("float")){
+                        System.out.print(variables.get(ctx.val().getText())+"("+ctx.val().getText()+")");
+                    }else{
+                        System.out.print(ctx.val().getText().toLowerCase());
                     }
                 }
                 else{
