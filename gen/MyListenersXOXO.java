@@ -14,6 +14,8 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     private Map<String, String> dictionary = new HashMap<String, String>();
 
+    private Map<String, String> variables = new HashMap<String, String>();
+
     @Override
     public void enterInit(LPPLenguageParser.InitContext ctx) { dictionary.put("verdadero", "True"); dictionary.put("falso", "False");; }
 
@@ -35,12 +37,10 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             System.out.print(identacion.toString());
             String tipo = ctx.TYPE().getText().toLowerCase();
             String name= ctx.ID(0).getText().toLowerCase();
-            if(!dimensions.isEmpty()){
+            if(!dimensions.isEmpty()) {
                 names.add(name);
-                name = "x"+count;
+                name = "x" + count;
             }
-            
-            
             if ((!ctx.arr_cad_aux().isEmpty() && (!tipo.equals("cadena") || ctx.arr_cad_aux(0).getRuleContext().getText().contains(","))) || ctx.arr_cad_aux().size() > 1) {
                 System.out.println(name + " = list()");
             }
@@ -48,18 +48,22 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                 switch (tipo) {
                     case "entero":
                         System.out.println(name + " = 0");
+                        variables.put(name, "int");
                         break;
 
                     case "real":
                         System.out.println(name + " = 0.0");
+                        variables.put(name, "float");
                         break;
 
                     case "booleano":
                         System.out.println(name + " = False");
+                        variables.put(name, "bool");
                         break;
 
                     case "caracter", "cadena":
                         System.out.println(name + " = ''");
+                        variables.put(name, "str "+ctx.arr_cad_aux(0).INT(0).getText());
                         break;
                 }
             }
@@ -72,18 +76,22 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                 switch (tipo) {
                     case "entero":
                         System.out.println(name + " = 0");
+                        variables.put(name, "int");
                         break;
 
                     case "real":
                         System.out.println(name + " = 0.0");
+                        variables.put(name, "float");
                         break;
 
                     case "booleano":
                         System.out.println(name + " = False");
+                        variables.put(name, "bool");
                         break;
 
                     case "caracter", "cadena":
                         System.out.println(name + "= ''");
+                        variables.put(name, "str");
                         break;
                 }
             }
@@ -93,9 +101,10 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             String tipo = ctx.ID(0).getText().toLowerCase();
             String name = ctx.ID(1).getText().toLowerCase();
             System.out.println(name + " = " + tipo + "()");
-
+            variables.put(name, tipo);
             for (int i = 0;i < ctx.COMMA().size(); i++) {
                 name = ctx.ID(i + 2).getText().toLowerCase();
+                variables.put(name, tipo);
                 System.out.println(name + " = " + tipo + "()");
             }
         }
@@ -276,6 +285,9 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterRegister_val(LPPLenguageParser.Register_valContext ctx) {
         for(int i=0; i<ctx.ID().size();i++){
             System.out.print("."+ctx.ID(i).getText());
+            if(variables.get(ctx.ID(i).getText())!=null && variables.get(ctx.ID(i).getText()).split(" ").length>1){
+                System.out.print("[0:"+variables.get(ctx.ID(i).getText()).split(" ")[1]+"]");
+            }
         }
     }
 
@@ -436,7 +448,15 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             if(dictionary.get(ctx.val().getText().toLowerCase())==null) {
                 if(ctx.val().CHR()!=null || ctx.val().STR()!=null){
                     System.out.print(ctx.val().getText());
-                }else{
+                }else if(ctx.val().ID()!=null && variables.get(ctx.val().ID().getText())!=null){
+                    if(variables.get(ctx.val().ID().getText()).split(" ").length>1){
+                        System.out.print(ctx.val().getText()+"[0:"+variables.get(ctx.val().ID().getText()).split(" ")[1]+"]");
+                    }else if(variables.get(ctx.val().ID().getText()).equals("int") || variables.get(ctx.val().ID().getText()).equals("float")){
+                        System.out.print(variables.get(ctx.val().ID().getText())+"("+ctx.val().getText()+")");
+
+                    }
+                }
+                else{
                     System.out.print(ctx.val().getText().toLowerCase());
                 }
             }else{
