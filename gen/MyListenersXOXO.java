@@ -5,8 +5,6 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     private final StringBuilder identacion = new StringBuilder();
     private String identificador = "";
 
-    private int count = 0;
-
     private Stack<String> dimensions = new Stack<>();
 
     private Queue<String> names = new LinkedList<>();
@@ -32,6 +30,8 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             arrayString.append(")]");
         }
     }
+
+    private boolean arrayDefinition = false;
 
     @Override
     public void enterInit(LPPLenguageParser.InitContext ctx) { dictionary.put("verdadero", "True"); dictionary.put("falso", "False");; }
@@ -59,34 +59,35 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             if(!dimensions.isEmpty()) {
                 names.add(name);
 
-                //name = "x" + count;
-
             }
             if ((!ctx.arr_cad_aux().isEmpty() && (!tipo.equals("cadena") || ctx.arr_cad_aux(0).getRuleContext().getText().contains(","))) || ctx.arr_cad_aux().size() > 1) {
                 System.out.println(name + " = list()");
             }
             else {
-                switch (tipo) {
-                    case "entero":
-                        System.out.println(name + " = 0");
-                        variables.put(name, "int");
-                        break;
+                if(!arrayDefinition){
+                    switch (tipo) {
+                        case "entero":
+                            System.out.println(name + " = 0");
+                            variables.put(name, "int");
+                            break;
 
-                    case "real":
-                        System.out.println(name + " = 0.0");
-                        variables.put(name, "float");
-                        break;
+                        case "real":
+                            System.out.println(name + " = 0.0");
+                            variables.put(name, "float");
+                            break;
 
-                    case "booleano":
-                        System.out.println(name + " = False");
-                        variables.put(name, "bool");
-                        break;
+                        case "booleano":
+                            System.out.println(name + " = False");
+                            variables.put(name, "bool");
+                            break;
 
-                    case "caracter", "cadena":
-                        System.out.println(name + " = ''");
-                        variables.put(name, "str "+ctx.arr_cad_aux(0).INT(0).getText());
-                        break;
+                        case "caracter", "cadena":
+                            System.out.println(name + " = ''");
+                            variables.put(name, "str "+ctx.arr_cad_aux(0).INT(0).getText());
+                            break;
+                    }
                 }
+
             }
             for (int i = 0; i < ctx.COMMA().size(); i++) {
                 name = ctx.ID(i + 1).getText().toLowerCase();
@@ -133,6 +134,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
 
     @Override
     public void enterDim_arr(LPPLenguageParser.Dim_arrContext ctx) {
+        arrayDefinition = true;
         for(int i=0; i< ctx.INT().size();i++){
             dimensions.push(ctx.INT(i).getText());
             arrayDimensions.push(ctx.INT(i).getText());
@@ -150,6 +152,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             System.out.println(identacion+names.poll()+" = "+ arrayString.toString());
             arrayString.setLength(0);
         }
+        arrayDefinition = false;
     }
 
     @Override
