@@ -1,52 +1,12 @@
-/*
-
-Matrices y arreglos
-
-*/
-
-Arreglo[5] de aRReglO[10] de arREGlo[5,5] dE arreglo[3,3,3] de eNtero O_o
-arreGlo[2,2,2] de booleano Booleans
-entero walker1, walker2, walker3
-booleano result
-
+entero acumulador
+entero i
 inicio
-  O_o[0][2][1,3][1,2,0] <- 19
-
-  escriba "The secret number is: ",o_O[0][2][1,3][1,2,0]
-
-  llamar nueva_Linea
-
-  escriba "What about the other array?", ("Let´s make it possible "),':','v'
-
-  llamar nueva_linea
-
-  Booleans[0,0,0] <- falso
-  Booleans[0,0,1] <- falso
-  Booleans[0,1,0] <- verdadero
-  Booleans[0,1,1] <- verdadero
-  Booleans[1,0,0] <- falso
-  Booleans[1,0,1] <- falso
-  Booleans[1,1,0] <- verdadero
-  Booleans[1,1,1] <- falso
-
-  walker1 <- 0
-
-  mientras walker1<2 haga
-     walker2<-0
-     mientras walker2<2 haga
-        walker3<-0
-        mientras walker3<2 haga
-           escriba "booleans[",walker1,",",walker2,",",walker3,"] has value: ",(booleans[walker1,walker2,walker3])
-           llamar nueva_linea
-           walker3<-walker3+1
-        fin mientras
-       walker2<-walker2+1
-     fin mientras
-     walker1<-walker1+1
-  fin mientras
-
-  llamar nueva_linea
-
-  escriba "End of the program :3 ",(45*98/-(23 div 2)^3)
-
+ i<-0
+ acumulador<-0
+ repita
+ escriba ("Valor del acumulador en la iteracion: "),(acumulador)
+        llamar nueva_linea
+        i<-i+1
+        acumulador<-acumulador+(i*2)
+ hasta (i=20) o (acumulador mod 5=4)
 fin
