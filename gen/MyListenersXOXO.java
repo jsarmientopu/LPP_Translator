@@ -1,4 +1,3 @@
-import javax.print.DocFlavor;
 import java.util.*;
 
 public class MyListenersXOXO extends LPPLenguageBaseListener {
@@ -15,6 +14,24 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     private Map<String, String> dictionary = new HashMap<String, String>();
 
     private Map<String, String> variables = new HashMap<String, String>();
+
+    // String for making the array assignation after retrieving the corresponding name
+    private StringBuilder arrayString = new StringBuilder();
+    private Stack<String> arrayDimensions = new Stack<>();
+    public void getArrayAssign(){
+        // function for building list comprehension string
+        int dimSize = arrayDimensions.size();
+        for(int i = 0; i < dimSize; i++){
+            arrayString.append('[');
+        }
+        arrayString.append("0] * ");
+        arrayString.append(arrayDimensions.pop());
+        while(!arrayDimensions.isEmpty()){
+            arrayString.append(" for _ in range(");
+            arrayString.append(arrayDimensions.pop());
+            arrayString.append(")]");
+        }
+    }
 
     @Override
     public void enterInit(LPPLenguageParser.InitContext ctx) { dictionary.put("verdadero", "True"); dictionary.put("falso", "False");; }
@@ -41,7 +58,9 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             String name= ctx.ID(0).getText().toLowerCase();
             if(!dimensions.isEmpty()) {
                 names.add(name);
-                name = "x" + count;
+
+                //name = "x" + count;
+
             }
             if ((!ctx.arr_cad_aux().isEmpty() && (!tipo.equals("cadena") || ctx.arr_cad_aux(0).getRuleContext().getText().contains(","))) || ctx.arr_cad_aux().size() > 1) {
                 System.out.println(name + " = list()");
@@ -116,25 +135,20 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterDim_arr(LPPLenguageParser.Dim_arrContext ctx) {
         for(int i=0; i< ctx.INT().size();i++){
             dimensions.push(ctx.INT(i).getText());
-            System.out.println(identacion.toString()+"x"+count+"=[]");
-            System.out.println(identacion.toString()+"for y"+count+" in range(0,"+ctx.INT(i).getText()+"):");
-            identacion.append("\t");
-            count = count + 1;
+            arrayDimensions.push(ctx.INT(i).getText());
+
         }
     }
 
     @Override
     public void exitType_arr(LPPLenguageParser.Type_arrContext ctx) {
         while(!dimensions.isEmpty()){
-            if(count >0){
-                System.out.println(identacion.toString()+"x"+String.valueOf(count-1)+".append(x"+count+")");
-                identacion.deleteCharAt(identacion.length() - 1);
-            }
             dimensions.pop();
-            count = count -1;
         }
         while(!names.isEmpty()){
-            System.out.println(identacion+names.poll()+"=x0");
+            getArrayAssign();
+            System.out.println(identacion+names.poll()+" = "+ arrayString.toString());
+            arrayString.setLength(0);
         }
     }
 
