@@ -25,10 +25,12 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
         String name = ctx.ID().getText().toLowerCase();
         System.out.println(name + ":");
         identacion.append('\t');
+        System.out.println(identacion +"def __init__(self):");
+        identacion.append("\tself.");
     }
 
     public void exitRegister (LPPLenguageParser.RegisterContext ctx) {
-        identacion.deleteCharAt(identacion.length() - 1);
+        identacion.replace(identacion.length() - 7, identacion.length(), "");
     }
 
     @Override
@@ -285,9 +287,9 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
     public void enterRegister_val(LPPLenguageParser.Register_valContext ctx) {
         for(int i=0; i<ctx.ID().size();i++){
             System.out.print("."+ctx.ID(i).getText());
-            if(variables.get(ctx.ID(i).getText())!=null && variables.get(ctx.ID(i).getText()).split(" ").length>1){
-                System.out.print("[0:"+variables.get(ctx.ID(i).getText()).split(" ")[1]+"]");
-            }
+        }
+        if(variables.get(ctx.ID(ctx.ID().size()-1).getText())!=null && variables.get(ctx.ID(ctx.ID().size()-1).getText()).split(" ").length>1){
+            System.out.print("[0:"+variables.get(ctx.ID(ctx.ID().size()-1).getText()).split(" ")[1]+"]");
         }
     }
 
@@ -448,12 +450,11 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             if(dictionary.get(ctx.val().getText().toLowerCase())==null) {
                 if(ctx.val().CHR()!=null || ctx.val().STR()!=null){
                     System.out.print(ctx.val().getText());
-                }else if(ctx.val().ID()!=null && variables.get(ctx.val().ID().getText())!=null){
+                }else if(ctx.val().ID()!=null && variables.get(ctx.val().ID().getText())!=null && ctx.register_val()==null){
                     if(variables.get(ctx.val().ID().getText()).split(" ").length>1){
                         System.out.print(ctx.val().getText()+"[0:"+variables.get(ctx.val().ID().getText()).split(" ")[1]+"]");
                     }else if(variables.get(ctx.val().ID().getText()).equals("int") || variables.get(ctx.val().ID().getText()).equals("float")){
                         System.out.print(variables.get(ctx.val().ID().getText())+"("+ctx.val().getText()+")");
-
                     }
                 }
                 else{
