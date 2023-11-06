@@ -61,34 +61,35 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             String name= ctx.ID(0).getText().toLowerCase();
             if(!dimensions.isEmpty()) {
                 names.add(name);
-                name = "x" + count;
             }
             if ((!ctx.arr_cad_aux().isEmpty() && (!tipo.equals("cadena") || ctx.arr_cad_aux(0).getRuleContext().getText().contains(","))) || ctx.arr_cad_aux().size() > 1) {
                 System.out.println(name + " = list()");
             }
             else {
-                switch (tipo) {
-                    case "entero":
-                        System.out.println(name + " = 0");
-                        variables.put(name, "int");
-                        break;
+                if(!arrayDefinition) {
+                    switch (tipo) {
+                        case "entero":
+                            System.out.println(name + " = 0");
+                            variables.put(name, "int");
+                            break;
 
-                    case "real":
-                        System.out.println(name + " = 0.0");
-                        variables.put(name, "float");
-                        break;
+                        case "real":
+                            System.out.println(name + " = 0.0");
+                            variables.put(name, "float");
+                            break;
 
-                    case "booleano":
-                        System.out.println(name + " = False");
-                        variables.put(name, "bool");
-                        break;
-                    case "caracter":
-                        System.out.println(name + " = ''");
-                        break;
-                    case "cadena":
-                        System.out.println(name + " = ''");
-                        variables.put(name, "str "+ctx.arr_cad_aux(0).INT(0).getText());
-                        break;
+                        case "booleano":
+                            System.out.println(name + " = False");
+                            variables.put(name, "bool");
+                            break;
+                        case "caracter":
+                            System.out.println(name + " = ''");
+                            break;
+                        case "cadena":
+                            System.out.println(name + " = ''");
+                            variables.put(name, "str " + ctx.arr_cad_aux(0).INT(0).getText());
+                            break;
+                    }
                 }
             }
             for (int i = 0; i < ctx.COMMA().size(); i++) {
@@ -210,6 +211,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
             }
             //params.append("global ");
         }else{
+            System.out.print(ctx.ID().getText().toUpperCase()+"No_Used");
             globals.add(ctx.ID().getText().toLowerCase());
         }
         //params.append(ctx.ID().getText().toLowerCase());
@@ -254,6 +256,7 @@ public class MyListenersXOXO extends LPPLenguageBaseListener {
                     break;
             }
         }else{
+            System.out.print(", "+ctx.ID().getText().toUpperCase()+"No_Used");
             globals.add(ctx.ID().getText().toLowerCase());
         }
         //System.out.print(", " + (ctx.VAR() != null ? "global" : "") + ctx.ID().getText().toLowerCase());

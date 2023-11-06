@@ -1,12 +1,18 @@
-entero acumulador
-entero i
+// ejemplo de programa con procedimiento con parámetros referenciados
+
+cadena[30] nombre,apellido
+procedimiento pedir_datos(var cadena[30] nombre,var cadena[30] apellido)
+
+/* la palabra reservada var crea una referencia entre la variable global del programa y la variable local del procedimiento del mismo nombre, en este caso nombre y apellido */
+	inicio
+		escriba "Ingresar el nombre: "
+		lea nombre
+		Escriba "Ingresar el apellido: "
+		lea apellido
+	fin
 inicio
- i<-0
- acumulador<-0
- repita
- escriba ("Valor del acumulador en la iteracion: "),(acumulador)
-        llamar nueva_linea
-        i<-i+1
-        acumulador<-acumulador+(i*2)
- hasta (i=20) o (acumulador mod 5=4)
+	nombre<-"No hay cambios en nombre"
+	apellido<-"No hay cambios en apellido"
+	llamar pedir_datos(nombre,apellido)
+	escriba "Nombre completo ",nombre," ",apellido
 fin
